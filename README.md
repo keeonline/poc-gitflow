@@ -2,4 +2,4 @@
 
 feature 2
 
-feature 3
+update feature 3
