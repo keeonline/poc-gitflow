@@ -1,7 +1,4 @@
 # poc-gitflow
 
-update to feature 2
+feature 4
 
-update feature 3
-
-bugfix release-1
