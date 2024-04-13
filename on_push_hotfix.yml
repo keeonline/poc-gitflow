@@ -1,9 +1,9 @@
-name: Push to feature branch
+name: Push to hotfix branch
 
 on:
   push:
     branches:
-      - 'feature*'
+      - 'hotfix*'
 
 jobs:
   process-push:
@@ -16,17 +16,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Determine feature tag value
+      - name: Determine hotfix tag value
         id: determine_version
         uses: paulhatch/semantic-version@v5.4.0
-      - name: Create a tag for the feature
+      - name: Create a tag for the hotfix
         id: feature_tag
         run: echo "value=${{ steps.determine_version.outputs.version_tag }}+${{ steps.determine_version.outputs.increment }}-${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
-      - name: Show the feature tag value
-        run: 'echo This is the feature tag value that any job or step in the workflow can now use: ${{steps.feature_tag.outputs.value}}'
-      # - name: Tag the branch with the feature tag value
-      #   uses: rickstaa/action-create-tag@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     tag: ${{ steps.feature_tag.outputs.value }}
+      - name: Show the hotfix tag value
+        run: 'echo This is the hotfix tag value that any job or step in the workflow can now use: ${{steps.hotfix_tag.outputs.value}}'
+
