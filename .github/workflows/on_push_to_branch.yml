@@ -17,8 +17,8 @@ jobs:
       - name: Determine branch type
         id: branch_type
         run: |
-          if [[ ${GITHUB_REF_NAME} == feature* ]]; then
-            echo "this is a feature branch"
+          if [[ ${GITHUB_REF_NAME} == develop* ]]; then
+            echo "this is a develop branch"
           fi
           if [[ ${GITHUB_REF_NAME} == feature* ]]; then
             echo "this is a feature branch"
