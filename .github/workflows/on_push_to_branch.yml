@@ -20,7 +20,10 @@ jobs:
           if [[ ${GITHUB_REF_NAME} == feature* ]]; then
             echo "this is a feature branch"
           fi
-    #   - name: Determine application tag value
+          if [[ ${GITHUB_REF_NAME} == feature* ]]; then
+            echo "this is a feature branch"
+          fi
+#   - name: Determine application tag value
     #     id: determine_version
     #     uses: paulhatch/semantic-version@v5.4.0
     #   - name: Create an application tag 
