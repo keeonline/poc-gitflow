@@ -1,7 +1,7 @@
 name: Push to feature branch
 
 on:
-  wprkflow_call:
+  workflow_call:
 
 jobs:
   process-push:
