@@ -1,4 +1,4 @@
 # poc-gitflow
 
-feature 5
+feature 6
 
