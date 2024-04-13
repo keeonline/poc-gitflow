@@ -29,19 +29,19 @@ jobs:
             echo "value=feature" >> $GITHUB_OUTPUT
           fi
       - name: Push to main
-        if: ${{ steps.branch_type.outputs.value }} == 'main'
+        if: steps.branch_type.outputs.value == 'main'
         run: echo This is a push to main
       - name: Push to hotfix
-        if: ${{ steps.branch_type.outputs.value }} == 'hotfix'
+        if: steps.branch_type.outputs.value == 'hotfix'
         run: echo This is a push to hotfix
       - name: Push to release
-        if: ${{ steps.branch_type.outputs.value }} == 'release'
+        if: steps.branch_type.outputs.value == 'release'
         run: echo This is a push to release
       - name: Push to develop
-        if: ${{ steps.branch_type.outputs.value }} == 'develop'
+        if: steps.branch_type.outputs.value == 'develop'
         run: echo This is a push to develop
       - name: Push to feature
-        if: ${{ steps.branch_type.outputs.value }} == 'feature'
+        if: steps.branch_type.outputs.value == 'feature'
         run: echo This is a push to feature
 
   
