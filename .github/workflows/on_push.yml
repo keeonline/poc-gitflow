@@ -46,9 +46,9 @@ jobs:
   develop-push:
     needs: [push-type]
     if: needs.push-type.outputs.value == 'develop'
-    uses: ./.github/workflows/helper/on_push_develop.yml
+    uses: ./.github/workflows/on_push_develop.yml
   feature-push:
     needs: [push-type]
     if: needs.push-type.outputs.value == 'feature'
-    uses: ./.github/workflows/helper/on_push_feature.yml
+    uses: ./.github/workflows/on_push_feature.yml
   
