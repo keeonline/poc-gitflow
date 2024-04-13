@@ -17,24 +17,26 @@ jobs:
       - name: Determine branch type
         id: branch_type
         run: |
-          if [[ ${GITHUB_REF_NAME} == develop* ]]; then
-            echo "this is a develop branch"
+          if [[ ${GITHUB_REF_NAME} == main* ]]; then
+            echo "value=main" >> $GITHUB_OUTPUT
+          elif [[ ${GITHUB_REF_NAME} == hotfix* ]]; then
+            echo "value=hotfix" >> $GITHUB_OUTPUT
+          elif [[ ${GITHUB_REF_NAME} == release* ]]; then
+            echo "value=release" >> $GITHUB_OUTPUT
+          elif [[ ${GITHUB_REF_NAME} == develop* ]]; then
+            echo "value=develop" >> $GITHUB_OUTPUT
+          else
+            echo "value=feature" >> $GITHUB_OUTPUT
           fi
-          if [[ ${GITHUB_REF_NAME} == feature* ]]; then
-            echo "this is a feature branch"
-          fi
-#   - name: Determine application tag value
-    #     id: determine_version
-    #     uses: paulhatch/semantic-version@v5.4.0
-    #   - name: Create an application tag 
-    #     id: application_tag
-    #     run: echo "value=${{ steps.determine_version.outputs.version_tag }}" >> $GITHUB_OUTPUT
-    #   - name: Show the application tag value
-    #     run: 'echo This is the application tag value that any job or step in the workflow can now use: ${{steps.application_tag.outputs.value}}'
-    #   - name: Tag the branch with the application version
-    #     uses: rickstaa/action-create-tag@v1
-    #     env:
-    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #     with:
-    #       tag: ${{steps.application_tag.outputs.value}}
+      - name: Push to main
+        run: echo This is a push to main
+      - name: Push to hotfix
+        run: echo This is a push to hotfix
+      - name: Push to release
+        run: echo This is a push to release
+      - name: Push to develop
+        run: echo This is a push to develop
+      - name: Push to feature
+        run: echo This is a push to feature
+
   
