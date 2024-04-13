@@ -1,3 +1,3 @@
 # poc-gitflow
 
-feature 2
+update to feature 2
