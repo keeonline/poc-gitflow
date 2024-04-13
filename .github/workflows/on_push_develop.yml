@@ -1,13 +1,13 @@
-name: Push to feature branch
+name: Push to develop branch
 
 on:
   push:
     branches:
-      - 'feature*'
+      - 'develop*'
 
 jobs:
   process-push:
-    name: Execute push on feature branch
+    name: Execute push on develop branch
     runs-on: ubuntu-latest
     permissions:
       contents: write # this must be set to 'write' in order for the workflow to add a tag
@@ -16,11 +16,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Determine feature tag value
+      - name: Determine develop tag value
         id: determine_version
         uses: paulhatch/semantic-version@v5.4.0
-      - name: Create a tag for the feature
-        id: feature_tag
+      - name: Create a tag for the develop
+        id: develop_tag
         run: echo "value=${{ steps.determine_version.outputs.version_tag }}+${{ steps.determine_version.outputs.increment }}-${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
-      - name: Show the feature tag value
-        run: 'echo This is the feature tag value that any job or step in the workflow can now use: ${{steps.feature_tag.outputs.value}}'
+      - name: Show the develop tag value
+        run: 'echo This is the develop tag value that any job or step in the workflow can now use: ${{steps.develop_tag.outputs.value}}'
