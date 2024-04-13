@@ -1,0 +1,37 @@
+name: Push to branch
+
+on:
+  push:
+
+jobs:
+  process-push:
+    name: Execute push on branch
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # this must be set to 'write' in order for the workflow to add a tag
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Determine branch type
+        id: branch_type
+        run: |
+          if [[ ${GITHUB_REF_NAME} == feature* ]]; then
+            echo "this is a feature branch"
+          fi
+    #   - name: Determine application tag value
+    #     id: determine_version
+    #     uses: paulhatch/semantic-version@v5.4.0
+    #   - name: Create an application tag 
+    #     id: application_tag
+    #     run: echo "value=${{ steps.determine_version.outputs.version_tag }}" >> $GITHUB_OUTPUT
+    #   - name: Show the application tag value
+    #     run: 'echo This is the application tag value that any job or step in the workflow can now use: ${{steps.application_tag.outputs.value}}'
+    #   - name: Tag the branch with the application version
+    #     uses: rickstaa/action-create-tag@v1
+    #     env:
+    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     with:
+    #       tag: ${{steps.application_tag.outputs.value}}
+  
