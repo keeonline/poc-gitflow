@@ -39,7 +39,7 @@ jobs:
         run: echo This is a push to release
       - name: Push to develop
         if: steps.branch_type.outputs.value == 'develop'
-        uses: ./.github/workflows/on_push_develop.yml
+        run: echo This is a push to develop
       - name: Push to feature
         if: steps.branch_type.outputs.value == 'feature'
         run: echo This is a push to feature
