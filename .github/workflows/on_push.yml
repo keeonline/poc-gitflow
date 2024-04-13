@@ -4,11 +4,11 @@ on:
   push:
 
 jobs:
-  process-push:
+  push-type:
     name: Execute push on branch
     runs-on: ubuntu-latest
-    permissions:
-      contents: write # this must be set to 'write' in order for the workflow to add a tag
+    outputs:
+      value: ${{ steps.branch_type.outputs.value }}
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
@@ -44,7 +44,8 @@ jobs:
         if: steps.branch_type.outputs.value == 'feature'
         run: echo This is a push to feature
   develop-push:
-    needs: [process-push]
+    needs: [push-type]
+    if: needs.push-type.outputs.value == 'develop'
     uses: ./.github/workflows/on_push_develop.yml
 
 
