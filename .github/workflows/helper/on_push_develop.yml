@@ -1,0 +1,36 @@
+name: Push to develop branch
+
+on:
+  workflow_call:
+
+jobs:
+  process-push:
+    name: Execute push on develop branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Get the semantic version
+        id: semantic_version
+        uses: paulhatch/semantic-version@v5.4.0
+      - name: Create a develop version
+        id: develop_version
+        run: echo "value=${{ steps.semantic_version.outputs.version_tag }}+${{ steps.semantic_version.outputs.increment }}-${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
+      - name: Show the develop version
+        run: 'echo This is the develop version that any job or step in the workflow can now use: ${{steps.develop_version.outputs.value}}'
+      - name: Linting
+        run: echo This is the linting step
+      - name: Build
+        run: echo This is the build step
+      - name: Static Application Security Testing (SAST) 
+        run: echo This is the SAST step
+      - name: Software Composition Analysis (SCA) 
+        run: echo This is the SCA step
+      - name: SyStem Integration testing (SIT) 
+        run: echo This is the SIT step
+      - name: Dynamic Application Security Testing (DAST) 
+        run: echo This is the DAST step
+      - name: Performance Test (PT) 
+        run: echo This is the DAST step
