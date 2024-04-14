@@ -16,18 +16,26 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Determine application tag value
-        id: determine_version
+      - name: Determine release version value
+        id: release_version
         uses: paulhatch/semantic-version@v5.4.0
-      - name: Create an application tag 
-        id: application_tag
-        run: echo "value=${{ steps.determine_version.outputs.version_tag }}" >> $GITHUB_OUTPUT
-      - name: Show the application tag value
-        run: 'echo This is the application tag value that any job or step in the workflow can now use: ${{steps.application_tag.outputs.value}}'
+      - name: Show the release version value
+        run: 'echo This is the release version that any job or step in the workflow can now use: ${{steps.release_version.outputs.value}}'
       - name: Tag the branch with the application version
         uses: rickstaa/action-create-tag@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag: ${{steps.application_tag.outputs.value}}
-  
+          tag: ${{steps.release_version.outputs.value}}
+      - name: Build
+        run: echo This is the build step
+      - name: Static Application Security Testing (SAST) 
+        run: echo This is the SAST step
+      - name: Software Composition Analysis (SCA)
+        run: echo This is the SCA step
+      - name: SyStem Integration testing (SIT)
+        run: echo This is the SIT step
+      - name: Dynamic Application Security Testing (DAST) 
+        run: echo This is the DAST step
+      - name: Performance Test (PT) 
+        run: echo This is the DAST step  

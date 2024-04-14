@@ -1,22 +1,35 @@
 name: Push to feature branch
 
 on:
-  workflow_call:
+  push:
+    branches: 
+      - '**'
+      - '!main'
+      - '!develop'
+      - '!hotfix*'
+      - '!release*'
 
 jobs:
-  process-push:
+  push-type:
     name: Execute push on feature branch
     runs-on: ubuntu-latest
+    outputs:
+      value: ${{ steps.branch_type.outputs.value }}
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Determine feature tag value
-        id: determine_version
+      - name: Determine semantic version
+        id: semantic_version
         uses: paulhatch/semantic-version@v5.4.0
-      - name: Create a tag for the feature
-        id: feature_tag
-        run: echo "value=${{ steps.determine_version.outputs.version_tag }}+${{ steps.determine_version.outputs.increment }}-${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
-      - name: Show the feature tag value
-        run: 'echo This is the feature tag value that any job or step in the workflow can now use: ${{steps.feature_tag.outputs.value}}'
+      - name: Create a feature version
+        id: feature_version
+        run: echo "value=${{ steps.semantic_version.outputs.version_tag }}+${{ steps.semantic_version.outputs.increment }}-${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
+      - name: Show the feature version value
+        run: 'echo This is the feature version that any job or step in the workflow can now use: ${{steps.feature_version.outputs.value}}'
+      - name: Linting
+        run: echo This is the linting step
+      - name: Build
+        run: echo This is the build step
+  
