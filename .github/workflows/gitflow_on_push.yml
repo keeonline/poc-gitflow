@@ -1,4 +1,4 @@
-name: Gitflow push to a branch
+name: Gitflow push
 
 # on:
 #   push:
