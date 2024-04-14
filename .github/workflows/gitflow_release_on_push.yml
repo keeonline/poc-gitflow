@@ -1,4 +1,4 @@
-name: Gitflow push
+name: Release push
 
 # on:
 #   push:
