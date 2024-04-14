@@ -40,5 +40,5 @@ jobs:
     name: PR to main
     needs: [get-branch-type]
     if: needs.get-branch-type.outputs.value == 'main'
-    uses: ./.github/workflows/gitflow_main_on_push.yml
+    uses: ./.github/workflows/gitflow_main_on_pull_request.yml
         
