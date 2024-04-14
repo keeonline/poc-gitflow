@@ -33,11 +33,11 @@ jobs:
           else
             echo "value=feature" >> $GITHUB_OUTPUT
           fi
-  # push-to-main:
-  #   name: Push to main
-  #   needs: [get-branch-type]
-  #   if: needs.get-branch-type.outputs.value == 'main'
-  #   uses: ./.github/workflows/gitflow_main_on_push.yml
+  push-to-main:
+    name: Push to main
+    needs: [get-branch-type]
+    if: needs.get-branch-type.outputs.value == 'main'
+    uses: ./.github/workflows/gitflow_main_on_push.yml
   push-to-release:
     name: Push to release
     needs: [get-branch-type]
