@@ -1,13 +1,16 @@
-name: Push to feature branch
+name: Feature push
+
+# on:
+#   push:
+#     branches: 
+#       - '**'
+#       - '!main'
+#       - '!develop'
+#       - '!hotfix*'
+#       - '!release*'
 
 on:
-  push:
-    branches: 
-      - '**'
-      - '!main'
-      - '!develop'
-      - '!hotfix*'
-      - '!release*'
+  workflow_call:
 
 jobs:
   process-push:
