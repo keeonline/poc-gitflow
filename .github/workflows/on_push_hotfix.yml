@@ -17,11 +17,15 @@ jobs:
         with:
           fetch-depth: 0
       - name: Determine hotfix tag value
-        id: determine_version
+        id: semantic_version
         uses: paulhatch/semantic-version@v5.4.0
-      - name: Create a tag for the hotfix
-        id: feature_tag
-        run: echo "value=${{ steps.determine_version.outputs.version_tag }}+${{ steps.determine_version.outputs.increment }}-${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
-      - name: Show the hotfix tag value
-        run: 'echo This is the hotfix tag value that any job or step in the workflow can now use: ${{steps.hotfix_tag.outputs.value}}'
+      - name: Create a hotfix version
+        id: hotfix_version
+        run: echo "value=${{ steps.semantic_version.outputs.version_tag }}+${{ steps.semantic_version.outputs.increment }}-${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
+      - name: Show the hotfix version value
+        run: 'echo This is the hotfix version that any job or step in the workflow can now use: ${{steps.hotfix_tag.outputs.value}}'
+      - name: Linting
+        run: echo This is the linting step
+      - name: Build
+        run: echo This is the build step
 

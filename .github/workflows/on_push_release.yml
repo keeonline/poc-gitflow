@@ -17,10 +17,22 @@ jobs:
         with:
           fetch-depth: 0
       - name: Determine release tag value
-        id: determine_version
+        id: semantic_version
         uses: paulhatch/semantic-version@v5.4.0
-      - name: Create a tag for the release
-        id: release_tag
-        run: echo "value=${{ steps.determine_version.outputs.version_tag }}+${{ steps.determine_version.outputs.increment }}-${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
-      - name: Show the release tag value
-        run: 'echo This is the release tag value that any job or step in the workflow can now use: ${{steps.release_tag.outputs.value}}'
+      - name: Create a release branch version
+        id: release_branch_version
+        run: echo "value=${{ steps.semantic_version.outputs.version_tag }}+${{ steps.semantic_version.outputs.increment }}-${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
+      - name: Show the release branch version
+        run: 'echo This is the release branch version that any job or step in the workflow can now use: ${{steps.release_branch_version.outputs.value}}'
+      - name: Build
+        run: echo This is the build step
+      - name: Static Application Security Testing (SAST) 
+        run: echo This is the SAST step
+      - name: Software Composition Analysis (SCA)
+        run: echo This is the SCA step
+      - name: SyStem Integration testing (SIT)
+        run: echo This is the SIT step
+      - name: Dynamic Application Security Testing (DAST) 
+        run: echo This is the DAST step
+      - name: Performance Test (PT) 
+        run: echo This is the DAST step
