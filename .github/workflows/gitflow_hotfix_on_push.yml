@@ -10,7 +10,7 @@ on:
 
 jobs:
   process-push:
-    name: process push to hotfix branch
+    name: Process push to hotfix branch
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
