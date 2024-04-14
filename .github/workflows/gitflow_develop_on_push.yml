@@ -1,9 +1,12 @@
-name: Push to develop branch
+name: Develop push
+
+# on:
+#   push:
+#     branches: 
+#       - develop
 
 on:
-  push:
-    branches: 
-      - develop
+  workflow_call:
 
 jobs:
   process-push:
