@@ -20,18 +20,13 @@ jobs:
       - name: Determine branch type
         id: branch_type
         run: |
-          if [[ ${GITHUB_REF_NAME} == main ]] ; then
+          if [[ ${GITHUB_BASE_REF} == main ]] ; then
             echo "value=main" >> $GITHUB_OUTPUT
-          elif [[ ${GITHUB_REF_NAME} == develop ]] ; then
+          elif [[ ${GITHUB_BASE_REF} == develop ]] ; then
             echo "value=develop" >> $GITHUB_OUTPUT
-          elif [[ ${GITHUB_REF_NAME} == release* ]] ; then
-            echo "value=release" >> $GITHUB_OUTPUT
-          elif [[ ${GITHUB_REF_NAME} == hotfix* ]] ; then
-            echo "value=hotfix" >> $GITHUB_OUTPUT
           else
-            echo "value=feature" >> $GITHUB_OUTPUT
+            echo "value=other" >> $GITHUB_OUTPUT
           fi
-          echo branch is ${GITHUB_REF_NAME}
   pr-to-develop:
     name: PR to develop
     needs: [get-branch-type]
