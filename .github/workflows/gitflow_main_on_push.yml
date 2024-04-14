@@ -10,7 +10,7 @@ on:
 
 jobs:
   process-push:
-    name: Execute push on main
+    name: Process push to main
     runs-on: ubuntu-latest
     permissions:
       contents: write # this must be set to 'write' in order for the workflow to add a tag
