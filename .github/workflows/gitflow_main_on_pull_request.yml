@@ -1,9 +1,9 @@
-name: Pull request to develop branch
+name: Pull request to main branch
 
 on:
   pull_request:
     branches: 
-      - develop
+      - main
 
 jobs:
   process-pull-request:
