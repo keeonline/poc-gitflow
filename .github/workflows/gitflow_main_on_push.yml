@@ -16,11 +16,14 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Get the semantic version
+        id: sementic_version
+        uses: paulhatch/semantic-version@v5.4.0
       - name: Get the release version
         id: release_version
-        uses: paulhatch/semantic-version@v5.4.0
+        run: echo "value=${{ steps.semantic_version.outputs.version_tag }}" >> $GITHUB_OUTPUT
       - name: Show the release version
-        run: 'echo This is the release version that any job or step in the workflow can now use: ${{steps.release_version.outputs.value}}'
+        run: 'echo This is the release version that will be tagged on main: ${{steps.release_version.outputs.value}}'
       - name: Tag main with the release version
         uses: rickstaa/action-create-tag@v1
         env:
