@@ -1,0 +1,9 @@
+name: Push to a branch
+
+on:
+  push:
+
+jobs:
+  process-push:
+    name: Process push to a branch
+    uses: ./.github/workflows/gitflow_on_push.yml

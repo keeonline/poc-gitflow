@@ -1,9 +1,12 @@
 name: Push to release branch
 
+# on:
+#   push:
+#     branches:
+#       - 'release*'
+
 on:
-  push:
-    branches:
-      - 'release*'
+  workflow_call:
 
 jobs:
   process-push:
