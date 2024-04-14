@@ -26,7 +26,7 @@ jobs:
         run: 'echo Not Implemented: build action'
       - name: Publish arterfact
         run: 'echo Not Implemented: publish action'
-      - name: SyStem Integration testing (SIT)
+      - name: System Integration testing (SIT)
         run: 'echo Not Implemented: SIT action'
       - name: Dynamic Application Security Testing (DAST) 
         run: 'echo Not Implemented: DAST step'
