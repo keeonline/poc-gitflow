@@ -31,6 +31,7 @@ jobs:
           else
             echo "value=feature" >> $GITHUB_OUTPUT
           fi
+          echo branch is ${GITHUB_REF_NAME}
   pr-to-develop:
     name: PR to develop
     needs: [get-branch-type]
