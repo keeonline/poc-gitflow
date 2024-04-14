@@ -7,25 +7,24 @@ on:
 
 jobs:
   process-push:
-    name: Execute push on feature branch
+    name: process push to hotfix branch
     runs-on: ubuntu-latest
-    permissions:
-      contents: write # this must be set to 'write' in order for the workflow to add a tag
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Determine hotfix tag value
+      - name: Get the semantic version
         id: semantic_version
         uses: paulhatch/semantic-version@v5.4.0
-      - name: Create a hotfix version
-        id: hotfix_version
+      - name: Get the hotfix branch version
+        id: hotfix_branch_version
         run: echo "value=${{ steps.semantic_version.outputs.version_tag }}+${{ steps.semantic_version.outputs.increment }}-${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
-      - name: Show the hotfix version value
-        run: 'echo This is the hotfix version that any job or step in the workflow can now use: ${{steps.hotfix_tag.outputs.value}}'
       - name: Linting
-        run: echo This is the linting step
+        run: 'echo Not Implemented: linting action'
       - name: Build
-        run: echo This is the build step
+        run: 'echo Not Implemented: build action'
+      - name: Publish artefact
+        run: 'echo Not Implemented: publish action'
+
 

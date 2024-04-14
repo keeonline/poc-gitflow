@@ -7,32 +7,28 @@ on:
 
 jobs:
   process-push:
-    name: Execute push on release branch
+    name: Process push to release branch
     runs-on: ubuntu-latest
-    permissions:
-      contents: write # this must be set to 'write' in order for the workflow to add a tag
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Determine release tag value
+      - name: Get the semantic version
         id: semantic_version
         uses: paulhatch/semantic-version@v5.4.0
-      - name: Create a release branch version
+      - name: Get the release branch version
         id: release_branch_version
         run: echo "value=${{ steps.semantic_version.outputs.version_tag }}+${{ steps.semantic_version.outputs.increment }}-${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
       - name: Show the release branch version
         run: 'echo This is the release branch version that any job or step in the workflow can now use: ${{steps.release_branch_version.outputs.value}}'
       - name: Build
-        run: echo This is the build step
-      - name: Static Application Security Testing (SAST) 
-        run: echo This is the SAST step
-      - name: Software Composition Analysis (SCA)
-        run: echo This is the SCA step
+        run: 'echo Not Implemented: build action'
+      - name: Publish arterfact
+        run: 'echo Not Implemented: publish action'
       - name: SyStem Integration testing (SIT)
-        run: echo This is the SIT step
+        run: 'echo Not Implemented: SIT action'
       - name: Dynamic Application Security Testing (DAST) 
-        run: echo This is the DAST step
+        run: 'echo Not Implemented: DAST step'
       - name: Performance Test (PT) 
-        run: echo This is the DAST step
+        run: 'echo Not Implemented: PT step'

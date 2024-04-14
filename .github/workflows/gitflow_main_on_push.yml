@@ -16,26 +16,29 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Determine release version value
+      - name: Get the release version
         id: release_version
         uses: paulhatch/semantic-version@v5.4.0
-      - name: Show the release version value
+      - name: Show the release version
         run: 'echo This is the release version that any job or step in the workflow can now use: ${{steps.release_version.outputs.value}}'
-      - name: Tag the branch with the application version
+      - name: Tag main with the release version
         uses: rickstaa/action-create-tag@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag: ${{steps.release_version.outputs.value}}
       - name: Build
-        run: echo This is the build step
+        run: 'echo Not Implemented: build action'
+      - name: Publish artefact
+        run: 'echo Not Implemented: publish action'
       - name: Static Application Security Testing (SAST) 
-        run: echo This is the SAST step
+        run: 'echo Not Implemented: SAST action'
       - name: Software Composition Analysis (SCA)
-        run: echo This is the SCA step
-      - name: SyStem Integration testing (SIT)
-        run: echo This is the SIT step
+        run: 'echo Not Implemented: SCA action'
+      - name: System Integration testing (SIT)
+        run: 'echo Not Implemented: SIT action'
       - name: Dynamic Application Security Testing (DAST) 
-        run: echo This is the DAST step
+        run: 'echo Not Implemented: DAST action'
       - name: Performance Test (PT) 
-        run: echo This is the DAST step  
+        run: 'echo Not Implemented: PT action'
+
