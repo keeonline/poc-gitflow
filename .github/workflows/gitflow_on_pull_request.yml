@@ -10,8 +10,6 @@ jobs:
   get-branch-type:
     name: Process PR to a Gitflow branch
     runs-on: ubuntu-latest
-    permissions:
-      contents: write # this must be set to 'write' in order for the workflow to add a tag
     outputs:
       value: ${{ steps.branch_type.outputs.value }}
     steps:
