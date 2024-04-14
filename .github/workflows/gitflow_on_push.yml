@@ -7,9 +7,11 @@ on:
   workflow_call:
   
 jobs:
-  process-push:
+  get-branch-type:
     name: Process push to a Gitflow branch
     runs-on: ubuntu-latest
+    outputs:
+      value: ${{ steps.branch_type.outputs.value }}
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
@@ -29,16 +31,24 @@ jobs:
           else
             echo "value=feature" >> $GITHUB_OUTPUT
           fi
-      - name: Push to main
-        if: steps.branch_type.outputs.value == 'main'
-        uses: ./.github/workflows/gitflow_main_on_push.yml
-      - name: Push to release
-        if: steps.branch_type.outputs.value == 'release'
-        uses: ./.github/workflows/gitflow_release_on_push.yml
-      - name: Push to hotfix
-        if: steps.branch_type.outputs.value == 'hotfix'
-        uses: ./.github/workflows/gitflow_hotfix_on_push.yml
-      - name: Push to feature
-        if: steps.branch_type.outputs.value == 'feature'
-        uses: ./.github/workflows/gitflow_feature_on_push.yml
+  push-to-main:
+    name: Push to main
+    needs: [get-branch-type]
+    if: needs.get-branch-type.outputs.value == 'main'
+    uses: ./.github/workflows/gitflow_main_on_push.yml
+  push-to-release:
+    name: Push to release
+    needs: [get-branch-type]
+    if: needs.get-branch-type.outputs.value == 'release'
+    uses: ./.github/workflows/gitflow_release_on_push.yml
+  push-to-hotfix:
+    name: Push to hotfix
+    needs: [get-branch-type]
+    if: needs.get-branch-type.outputs.value == 'hotfix'
+    uses: ./.github/workflows/gitflow_hotfix_on_push.yml
+  push-to-feature:
+    name: Push to feature
+    needs: [get-branch-type]
+    if: needs.get-branch-type.outputs.value == 'feature'
+    uses: ./.github/workflows/gitflow_feature_on_push.yml
         
